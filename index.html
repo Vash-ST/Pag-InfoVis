@@ -133,12 +133,11 @@
 
     .info-grid {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1fr;
       gap: 22px;
       margin-top: 24px;
     }
 
-    .text-card,
     .source-card {
       padding: 24px;
     }
@@ -185,10 +184,9 @@
 
     @media (max-width: 820px) {
       .page { padding: 26px 14px 32px; }
-      .info-grid { grid-template-columns: 1fr; }
       .graphic-card { padding: 12px; }
       .graphic-frame { padding: 12px; }
-      .text-card, .source-card { padding: 20px; }
+      .source-card { padding: 20px; }
     }
   </style>
 </head>
@@ -209,13 +207,6 @@
     </section>
 
     <section class="info-grid">
-      <article class="card text-card">
-        <h2>¿Qué muestra este gráfico?</h2>
-        <p>
-          El gráfico compara el movimiento económico de cinco frutas con alta presencia en los mercados mayoristas de la Región Metropolitana. Al organizar la información por estación, se hace más fácil observar cuáles productos mantienen ingresos más estables y cuáles presentan alzas o bajas más marcadas durante el año.
-        </p>
-      </article>
-
       <aside class="card source-card">
         <h2>Fuente de datos</h2>
         <p class="source">
