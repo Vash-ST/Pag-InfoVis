@@ -258,7 +258,7 @@
         <button class="btn-read" onclick="playNarrativeAudio('insight_palta.mp3')">🔊</button>
         <div class="emoji">❄️</div>
         <span class="season-tag tag-invierno">Invierno</span>
-        <p><strong>Palta lidera en invierno</strong> con el mayor ingreso bruto de la estación ($934M), cuando la oferta de frutas de temporada cae y su precio sube.</p>
+        <p><strong>La palta lidera en invierno</strong> con el mayor ingreso bruto de la estación ($934M), cuando la oferta de frutas de temporada cae y su precio sube.</p>
       </div>
 
       <!-- OTOÑO -->
@@ -266,7 +266,7 @@
         <button class="btn-read" onclick="playNarrativeAudio('insight_otono.mp3')">🔊</button>
         <div class="emoji">🍂</div>
         <span class="season-tag tag-otono">Otoño</span>
-        <p><strong>Tomate domina en otoño</strong> con $1.608M de ingreso bruto, casi el doble que el segundo lugar (Papa, $1.001M), marcando una brecha clara.</p>
+        <p><strong>El tomate domina en otoño</strong> con $1.608M de ingreso bruto, casi el doble que el segundo lugar (Papa, $1.001M), marcando una brecha clara.</p>
       </div>
 
       <!-- PRIMAVERA -->
@@ -274,7 +274,7 @@
         <button class="btn-read" onclick="playNarrativeAudio('insight_cebolla.mp3')">🔊</button>
         <div class="emoji">🌸</div>
         <span class="season-tag tag-primavera">Primavera</span>
-        <p><strong>Cebolla domina en primavera</strong> con $3.000M, concentrando el 30% del ingreso total de la estación — muy por encima de cualquier otro producto.</p>
+        <p><strong>La cebolla domina en primavera</strong> con $3.000M, concentrando el 30% del ingreso total de la estación — muy por encima de cualquier otro producto.</p>
       </div>
 
       <!-- VERANO -->
@@ -282,7 +282,7 @@
         <button class="btn-read" onclick="playNarrativeAudio('insight_verano.mp3')">🔊</button>
         <div class="emoji">☀️</div>
         <span class="season-tag tag-verano">Verano</span>
-        <p><strong>Cebolla y Tomate lideran en verano</strong> con $1.678M y $1.150M respectivamente, mientras el Limón sube al tercer lugar impulsado por la temporada.</p>
+        <p><strong>La cebolla y el tomate lideran en verano</strong> con $1.678M y $1.150M respectivamente, mientras el Limón sube al tercer lugar impulsado por la temporada.</p>
       </div>
 
       <!-- GENERAL -->
@@ -432,8 +432,14 @@ const layout = {
   },
   yaxis: {
     title: { text: 'Ingreso bruto (CLP)', font: { size: 12 }, standoff: 10 },
-    tickformat: '$.2s', gridcolor: '#f0ece4',
-    linecolor: 'transparent', tickfont: { size: 11 }, range: [0, 35e8],
+
+    tickvals: [0, 5e8, 10e8, 15e8, 20e8, 25e8, 30e8],
+    ticktext: ['$0', '$500M', '$1000M', '$1500M', '$2000M', '$2500M', '$3000M'],
+
+    gridcolor: '#f0ece4',
+    linecolor: 'transparent',
+    tickfont: { size: 11 },
+    range: [0, 35e8],
   },
   showlegend: false,
 };
