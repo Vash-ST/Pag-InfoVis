@@ -60,7 +60,7 @@
       position: relative;
       background: var(--card);
       border: 1px solid var(--line); border-left: 4px solid var(--accent);
-      border-radius: var(--radius); padding: 20px 24px 20px 24px;
+      border-radius: var(--radius); padding: 20px 24px;
       margin-bottom: 24px;
     }
     .narrative p { font-size: 1rem; line-height: 1.75; color: #374151; }
@@ -84,15 +84,10 @@
       transition: transform 0.18s; flex-shrink: 0;
     }
     .btn-read:hover { transform: scale(1.08); }
-
-    .narrative .btn-read {
-      position: absolute; top: 16px; right: 16px;
-    }
+    .narrative .btn-read { position: absolute; top: 16px; right: 16px; }
 
     /* ── BOTONES ESTACIÓN ── */
-    .season-row {
-      display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;
-    }
+    .season-row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
     .btn-season {
       display: inline-flex; align-items: center; gap: 7px;
       padding: 10px 20px;
@@ -112,11 +107,8 @@
     .btn-season.active[data-season="Primavera"] { border-color: var(--c-primavera); color: var(--c-primavera); background: #edf8f3; }
     .btn-season.active[data-season="Verano"]    { border-color: var(--c-verano);    color: var(--c-verano);    background: #fef6ec; }
 
-    /* ── SONIFICACIÓN HOVER ── */
-    .audio-row {
-      display: flex; align-items: center;
-      gap: 12px; margin-bottom: 16px; flex-wrap: wrap;
-    }
+    /* ── SONIFICACIÓN ── */
+    .audio-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
     .btn-audio {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 8px 18px;
@@ -147,18 +139,40 @@
 
     /* ── CONCLUSIONES ── */
     .insight {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 12px; margin-bottom: 40px;
     }
+
     .insight-item {
       position: relative;
       background: var(--card); border: 1px solid var(--line);
       border-radius: var(--radius); padding: 16px 20px;
     }
     .insight-item .btn-read { position: absolute; top: 14px; right: 14px; }
-    .insight-item .emoji    { font-size: 1.4rem; margin-bottom: 8px; }
-    .insight-item p         { font-size: 0.9rem; line-height: 1.6; color: #374151; }
-    .insight-item strong    { color: var(--text); }
+    .insight-item .emoji    { font-size: 1.4rem; margin-bottom: 6px; }
+    .insight-item .season-tag {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border-radius: 4px; padding: 2px 7px;
+      margin-bottom: 8px;
+    }
+    .insight-item p { font-size: 0.88rem; line-height: 1.6; color: #374151; }
+    .insight-item strong { color: var(--text); }
+
+    /* colores de tag por estación */
+    .tag-invierno  { background: #ddeef7; color: #1e5272; }
+    .tag-otono     { background: #fde8e2; color: #8a2f1a; }
+    .tag-primavera { background: #d9f2e6; color: #1b5e38; }
+    .tag-verano    { background: #fef0dc; color: #7a4a10; }
+    .tag-general   { background: var(--accent-lt); color: var(--accent); }
+
+    /* tarjeta general ocupa fila completa en pantallas grandes */
+    .insight-item.general {
+      grid-column: 1 / -1;
+      border-left: 4px solid var(--accent);
+    }
 
     /* ── FOOTER ── */
     footer {
@@ -174,6 +188,7 @@
       .narrative { padding: 16px 18px; }
       #chart { height: 380px; }
       footer { flex-direction: column; gap: 8px; }
+      .insight-item.general { grid-column: auto; }
     }
   </style>
 </head>
@@ -238,22 +253,49 @@
 
     <div class="insight">
 
+      <!-- INVIERNO -->
       <div class="insight-item">
         <button class="btn-read" onclick="playNarrativeAudio('insight_palta.mp3')">🔊</button>
-        <div class="emoji">🥑</div>
-        <p><strong>Palta lidera en invierno</strong> con el mayor ingreso bruto de la estación, cuando la oferta de otras frutas cae.</p>
+        <div class="emoji">❄️</div>
+        <span class="season-tag tag-invierno">Invierno</span>
+        <p><strong>Palta lidera en invierno</strong> con el mayor ingreso bruto de la estación ($934M), cuando la oferta de frutas de temporada cae y su precio sube.</p>
       </div>
 
+      <!-- OTOÑO -->
+      <div class="insight-item">
+        <button class="btn-read" onclick="playNarrativeAudio('insight_otono.mp3')">🔊</button>
+        <div class="emoji">🍂</div>
+        <span class="season-tag tag-otono">Otoño</span>
+        <p><strong>Tomate domina en otoño</strong> con $1.608M de ingreso bruto, casi el doble que el segundo lugar (Papa, $1.001M), marcando una brecha clara.</p>
+      </div>
+
+      <!-- PRIMAVERA -->
       <div class="insight-item">
         <button class="btn-read" onclick="playNarrativeAudio('insight_cebolla.mp3')">🔊</button>
-        <div class="emoji">🧅</div>
-        <p><strong>Cebolla domina en primavera</strong>, concentrando más del 30% del ingreso total de esa estación.</p>
+        <div class="emoji">🌸</div>
+        <span class="season-tag tag-primavera">Primavera</span>
+        <p><strong>Cebolla domina en primavera</strong> con $3.000M, concentrando el 30% del ingreso total de la estación — muy por encima de cualquier otro producto.</p>
       </div>
 
+      <!-- VERANO -->
       <div class="insight-item">
+        <button class="btn-read" onclick="playNarrativeAudio('insight_verano.mp3')">🔊</button>
+        <div class="emoji">☀️</div>
+        <span class="season-tag tag-verano">Verano</span>
+        <p><strong>Cebolla y Tomate lideran en verano</strong> con $1.678M y $1.150M respectivamente, mientras el Limón sube al tercer lugar impulsado por la temporada.</p>
+      </div>
+
+      <!-- GENERAL -->
+      <div class="insight-item general">
         <button class="btn-read" onclick="playNarrativeAudio('insight_general.mp3')">🔊</button>
         <div class="emoji">📊</div>
-        <p>El <strong>ranking cambia por estación</strong>: ningún producto domina de forma constante durante todo el año.</p>
+        <span class="season-tag tag-general">Conclusión general</span>
+        <p>
+          El <strong>ranking cambia significativamente por estación</strong>: ningún producto domina de forma constante durante todo el año.
+          La <strong>Cebolla</strong> es el único producto que aparece entre los líderes en tres de las cuatro estaciones.
+          La <strong>Palta</strong> solo destaca en invierno, mientras que el <strong>Tomate</strong> mantiene alta relevancia en otoño y verano.
+          Esto revela una <strong>alta estacionalidad</strong> en el mercado mayorista de la RM, donde el liderazgo económico rota según la disponibilidad y demanda de cada producto.
+        </p>
       </div>
 
     </div>
@@ -267,7 +309,7 @@
           datos.gob.cl/dataset/precios-mayoristas-de-frutas-y-hortaliz
         </a>
       </span>
-      <span>E1</span>
+      <span>E2</span>
     </footer>
 
   </div>
@@ -275,7 +317,7 @@
 </main>
 <script>
 // ═══════════════════════════════════════════════════
-// ARCHIVOS DE AUDIO — edita los nombres si es necesario
+// ARCHIVOS DE AUDIO
 // ═══════════════════════════════════════════════════
 const SEASON_SOUNDS = {
   Invierno:  'sonido_invierno.mp3',
@@ -321,16 +363,15 @@ const SEASON_COLOR = {
   Verano:    '#F4A261',
 };
 
-// Mapa de data-season a clave interna (sin tilde)
 const SEASON_KEY = {
-  Invierno:  'Invierno',
-  'Otoño':   'Otono',
-  Primavera: 'Primavera',
-  Verano:    'Verano',
+  'Invierno':  'Invierno',
+  'Otoño':     'Otono',
+  'Primavera': 'Primavera',
+  'Verano':    'Verano',
 };
 
 // ═══════════════════════════════════════════════════
-// AUDIO: BOTONES DE ESTACIÓN
+// AUDIO BOTONES DE ESTACIÓN
 // ═══════════════════════════════════════════════════
 const audioEls = {};
 Object.keys(SEASON_SOUNDS).forEach(key => {
@@ -342,17 +383,13 @@ Object.keys(SEASON_SOUNDS).forEach(key => {
 let currentAudio = null;
 
 function playSeasonSound(key) {
-  if (currentAudio) {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
-  }
+  if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
   const audio = audioEls[key];
   if (!audio) return;
   audio.currentTime = 0;
   const stopAt2s = () => {
     if (audio.currentTime >= 2) {
-      audio.pause();
-      audio.currentTime = 0;
+      audio.pause(); audio.currentTime = 0;
       audio.removeEventListener('timeupdate', stopAt2s);
     }
   };
@@ -370,11 +407,7 @@ function buildTrace(key) {
     type: 'bar',
     x: d.productos,
     y: d.ingresos,
-    marker: {
-      color: SEASON_COLOR[key],
-      opacity: 0.88,
-      line: { color: 'white', width: 1.5 },
-    },
+    marker: { color: SEASON_COLOR[key], opacity: 0.88, line: { color: 'white', width: 1.5 } },
     text: d.ingresos.map(v => '$' + (v / 1e6).toFixed(0) + 'M'),
     textposition: 'outside',
     textfont: { size: 10.5, color: '#374151', family: 'DM Sans, sans-serif' },
@@ -390,14 +423,12 @@ function buildTrace(key) {
 }
 
 const layout = {
-  paper_bgcolor: 'white',
-  plot_bgcolor:  'white',
+  paper_bgcolor: 'white', plot_bgcolor: 'white',
   margin: { t: 24, r: 24, b: 90, l: 80 },
   font: { family: 'DM Sans, sans-serif', color: '#374151' },
   xaxis: {
     title: { text: 'Producto', font: { size: 12 }, standoff: 16 },
-    tickfont: { size: 12 }, showgrid: false,
-    linecolor: '#e8e2d9', tickangle: -20,
+    tickfont: { size: 12 }, showgrid: false, linecolor: '#e8e2d9', tickangle: -20,
   },
   yaxis: {
     title: { text: 'Ingreso bruto (CLP)', font: { size: 12 }, standoff: 10 },
@@ -414,12 +445,10 @@ Plotly.newPlot('chart', [buildTrace('Invierno')], layout, { responsive: true, di
 // ═══════════════════════════════════════════════════
 document.querySelectorAll('.btn-season').forEach(btn => {
   btn.addEventListener('click', () => {
-    const season = btn.dataset.season;         // ej: "Otoño"
-    const key    = SEASON_KEY[season];         // ej: "Otono"
-
+    const season = btn.dataset.season;
+    const key    = SEASON_KEY[season];
     document.querySelectorAll('.btn-season').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-
     Plotly.react('chart', [buildTrace(key)], layout, { responsive: true, displayModeBar: false });
     playSeasonSound(key);
   });
@@ -462,18 +491,6 @@ document.getElementById('btn-audio').addEventListener('click', async function ()
   this.classList.toggle('on', audioOn);
 });
 
-function playHoverNote(ingreso) {
-  const t    = Math.min(Math.max((ingreso - 3e8) / (30e8 - 3e8), 0), 1);
-  const rate = 0.75 + t * 0.9;
-  const a    = new Audio('Sonido de dinero.mp3');
-  a.playbackRate      = rate;
-  a.preservesPitch    = false;
-  a.mozPreservesPitch = false;
-  a.webkitPreservesPitch = false;
-  a.volume = 0.55;
-  a.play().catch(() => {});
-}
-
 document.getElementById('chart').on('plotly_hover', function (data) {
   if (!data.points || !data.points.length) return;
   const pt = data.points[0];
@@ -490,18 +507,13 @@ document.getElementById('chart').on('plotly_hover', function (data) {
     `<span>${prod} · ${key}</span>: $${ingreso}M de ingreso bruto (${part}% del total de la estación). ${contexto[prod] || ''}`;
 
   if (audioOn) {
-    const total    = DATA[key].productos.length;
+    const total     = DATA[key].productos.length;
     const esPrimera = pt.pointIndex === 0;
     const esUltima  = pt.pointIndex === total - 1;
-
     if (esPrimera) {
-      const a = new Audio('primer_lugar.mp3');
-      a.volume = 0.6;
-      a.play().catch(() => {});
+      const a = new Audio('primer_lugar.mp3'); a.volume = 0.6; a.play().catch(() => {});
     } else if (esUltima) {
-      const a = new Audio('ultimo_lugar.mp3');
-      a.volume = 0.6;
-      a.play().catch(() => {});
+      const a = new Audio('ultimo_lugar.mp3'); a.volume = 0.6; a.play().catch(() => {});
     }
   }
 });
@@ -517,10 +529,7 @@ document.getElementById('chart').on('plotly_unhover', function () {
 let currentNarration = null;
 
 function playNarrativeAudio(src) {
-  if (currentNarration) {
-    currentNarration.pause();
-    currentNarration.currentTime = 0;
-  }
+  if (currentNarration) { currentNarration.pause(); currentNarration.currentTime = 0; }
   const a = new Audio(src);
   a.volume = 0.9;
   a.play().catch(() => {});
